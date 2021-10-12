@@ -1,4 +1,4 @@
-# _s theme generator
+# Theme Generator based on _s [underscores]
 
 
 Hi. Want to develop a WordPress theme and are looking for a good starter theme? That's what I'm here for. I'm a generator for the starter theme called `_s`, or `underscores`, if you like.
@@ -16,11 +16,11 @@ Installation
 ### Quick Start
 
 #### 1 - Generate
-Open the Terminal inside the `themes` directory and run the folowing commands:
+Open the Terminal inside the WordPress `themes` directory and run the folowing commands:
 
 ```sh
 $ cd /path/to/wp-content/themes
-$ npx _s
+$ npx underscores-gen
 ```
 
 You will be prompted to enter the theme name, slug and path.

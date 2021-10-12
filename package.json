@@ -1,8 +1,21 @@
 {
-  "name": "gen_s",
-  "version": "1.0.0",
+  "name": "underscores-gen",
+  "version": "1.0.3",
   "description": "Generator based on Underscores Theme for Wordpress",
+  "keywords": [
+    "underscores",
+    "_s",
+    "theme",
+    "wordpress",
+    "starter",
+    "sass"
+  ],
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/icaliman/underscores-gen.git"
+  },
+  "bin": "./index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
