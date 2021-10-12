@@ -1,0 +1,18 @@
+{
+  "name": "gen_s",
+  "version": "1.0.0",
+  "description": "Generator based on Underscores Theme for Wordpress",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "icaliman",
+  "license": "MIT",
+  "dependencies": {
+    "download": "^8.0.0",
+    "etl": "^0.6.12",
+    "prompts": "^2.4.2",
+    "slugify": "^1.6.1",
+    "unzipper": "^0.10.11"
+  }
+}
