@@ -48,4 +48,12 @@ $ npm install
 - `npm run lint:js` : checks all JavaScript files against [JavaScript Coding Standards](https://developer.wordpress.org/coding-standards/wordpress-coding-standards/javascript/).
 - `npm run bundle` : generates a .zip archive for distribution, excluding development and system files.
 
+### Setup Visual Studio Code
+
+1. Open Visual Studio Code.
+2. Press `Ctrl+P` on Windows or `Cmd+P` on Mac to open the Quick Open dialog.
+3. Type `ext install phpsab` to find the extension.
+4. Press Enter or click the cloud icon to install it.
+5. Restart Visual Studio Code!
+
 Now you're ready to go! The next step is easy to say, but harder to do: make an awesome WordPress theme. :)
