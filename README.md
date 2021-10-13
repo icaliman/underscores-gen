@@ -1,4 +1,4 @@
-# Theme Generator based on _s [underscores]
+# Generator based on [_s theme](https://github.com/automattic/_s)
 
 
 Hi. Want to develop a WordPress theme and are looking for a good starter theme? That's what I'm here for. I'm a generator for the starter theme called `_s`, or `underscores`, if you like.

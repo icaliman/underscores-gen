@@ -24,12 +24,16 @@ let url = "https://github.com/Automattic/_s/archive/refs/heads/master.zip";
       name: "theme_slug",
       message: `What's the theme slug?`,
       initial: (prev) => slugify(prev, { replacement: "-", lower: true }),
+      validate: (value) =>
+        !value.match(/^[a-z](-?[a-z])*$/)
+          ? `1) Use only lowercase letters and hyphens;\n2) Begin and end with a lowercase letter;\n3) Don't use consecutive hyphens;`
+          : true,
     },
     {
       type: "text",
       name: "root_dir",
       message: "Where do you want to save the theme?",
-      initial: (prev) => prev,
+      initial: (prev) => "./" + prev,
       validate: (value) =>
         fs.existsSync(value) ? `Sorry, this directory already exists.` : true,
     },
@@ -39,11 +43,10 @@ let url = "https://github.com/Automattic/_s/archive/refs/heads/master.zip";
     onCancel: () => process.exit(),
   });
 
-  const function_names =
-    slugify(theme_name, { replacement: "_", lower: true }) + "_";
+  const theme_prefix = theme_slug.replace(/-/g, "_") + "_";
   const doc_blocks = slugify(theme_name, { replacement: "_", lower: false });
   const prefixes = theme_slug + "-";
-  const constants = function_names.toUpperCase();
+  const constants = theme_prefix.toUpperCase();
 
   download(url)
     .pipe(unzipper.Parse())
@@ -61,7 +64,7 @@ let url = "https://github.com/Automattic/_s/archive/refs/heads/master.zip";
           content = content.replace(/'_s'/g, `'${theme_slug}'`);
 
           // 2 - Search for _s_ to capture all the functions names and replace with: megatherium_is_awesome_.
-          content = content.replace(/_s_/g, function_names);
+          content = content.replace(/_s_/g, theme_prefix);
 
           // 3 - Search for Text Domain: _s in style.css and replace with: Text Domain: megatherium-is-awesome.
           content = content.replace(
@@ -87,6 +90,21 @@ let url = "https://github.com/Automattic/_s/archive/refs/heads/master.zip";
           // Rename _s.pot from languages folder to use the theme's slug
           if (entry_path.endsWith("_s.pot")) {
             entry_path = entry_path.replace("_s.pot", theme_slug + ".pot");
+          }
+          if (entry_path.endsWith("composer.json")) {
+            content = content.replace("_s.pot", theme_slug + ".pot");
+          }
+
+          // Replacements inside PHPCS
+          if (entry_path.endsWith("phpcs.xml.dist")) {
+            content = content.replace(
+              'name="text_domain" type="array" value="_s"',
+              `name="text_domain" type="array" value="${theme_slug}"`
+            );
+            content = content.replace(
+              'name="prefixes" type="array" value="_s"',
+              `name="prefixes" type="array" value="${theme_prefix}"`
+            );
           }
 
           await fs.promises.writeFile(entry_path, content);
